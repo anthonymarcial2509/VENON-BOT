@@ -1,11 +1,10 @@
 const venom = require('venom-bot');
-const dotenv = require('dotenv');
 const fetch = require('node-fetch');
-dotenv.config();
+require('dotenv').config();
 
 venom
   .create({
-    session: 'cloud-bot',
+    session: 'bot-session',
     headless: true,
     useChrome: false,
     browserArgs: [
@@ -31,17 +30,22 @@ function start(client) {
   client.onMessage(async (message) => {
     if (!message.isGroupMsg && message.body) {
       try {
-        const res = await fetch(`${process.env.GPT_CHAT_URL}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ pregunta: message.body })
-        });
-        const data = await res.json();
-        await client.sendText(message.from, data.respuesta || 'Sin respuesta');
+        const respuesta = await enviarPreguntaAGPT(message.body);
+        await client.sendText(message.from, respuesta);
       } catch (err) {
         console.error('❌ Error al contactar con el servidor GPT:', err);
-        await client.sendText(message.from, 'Error al contactar con el servidor.');
+        await client.sendText(message.from, 'Error al contactar con la IA.');
       }
     }
   });
+}
+
+async function enviarPreguntaAGPT(pregunta) {
+  const res = await fetch('https://gpt-server-only.onrender.com/preguntar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pregunta })
+  });
+  const data = await res.json();
+  return data.respuesta || 'Sin respuesta del GPT';
 }
