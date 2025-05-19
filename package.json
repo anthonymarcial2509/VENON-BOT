@@ -1,7 +1,7 @@
 {
   "name": "venom-puppeteer-cloud",
   "version": "1.0.0",
-  "description": "Venom-Bot con Puppeteer en la nube - Railway compatible",
+  "description": "Venom-Bot corriendo en Railway o Render con Puppeteer",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
