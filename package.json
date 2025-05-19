@@ -2,10 +2,10 @@
   "name": "gpt-server-fixed",
   "version": "1.0.0",
   "description": "Servidor intermedio para conectar GPT personalizado con Venom",
-  "main": "servidor-gpt.js",
-  "scripts": {
-    "start": "node servidor-gpt.js"
-  },
+  "main": "index.js",
+"scripts": {
+  "start": "node index.js"
+}
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
