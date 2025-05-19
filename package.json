@@ -1,14 +1,14 @@
 {
-  "name": "venom-puppeteer-cloud",
+  "name": "gpt-server-fixed",
   "version": "1.0.0",
-  "description": "Venom-Bot ejecutado en Railway conectado a GPT en Render",
-  "main": "index.js",
+  "description": "Servidor intermedio para conectar GPT personalizado con Venom",
+  "main": "servidor-gpt.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node servidor-gpt.js"
   },
   "dependencies": {
-    "venom-bot": "^4.0.0",
-    "dotenv": "^16.0.3",
-    "node-fetch": "^2.6.7"
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
