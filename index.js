@@ -1,12 +1,13 @@
 const venom = require('venom-bot');
 const dotenv = require('dotenv');
+const fetch = require('node-fetch');
 dotenv.config();
 
 venom
   .create({
-    session: 'bot-session',
+    session: 'cloud-bot',
     headless: true,
-    useChrome: false, // Usa Chromium de Puppeteer
+    useChrome: false,
     browserArgs: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -16,8 +17,7 @@ venom
       '--single-process',
       '--disable-gpu'
     ],
-    logQR: false, // true si quieres ver el QR por consola
-    disableWelcome: true
+    logQR: true
   })
   .then((client) => start(client))
   .catch((error) => {
@@ -31,9 +31,16 @@ function start(client) {
   client.onMessage(async (message) => {
     if (!message.isGroupMsg && message.body) {
       try {
-        await client.sendText(message.from, 'Hola! Soy un bot en la nube con Puppeteer.');
+        const res = await fetch(`${process.env.GPT_CHAT_URL}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pregunta: message.body })
+        });
+        const data = await res.json();
+        await client.sendText(message.from, data.respuesta || 'Sin respuesta');
       } catch (err) {
-        console.error('❌ Error enviando mensaje:', err);
+        console.error('❌ Error al contactar con el servidor GPT:', err);
+        await client.sendText(message.from, 'Error al contactar con el servidor.');
       }
     }
   });
