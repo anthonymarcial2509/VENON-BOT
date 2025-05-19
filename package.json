@@ -1,7 +1,7 @@
 {
   "name": "venom-puppeteer-cloud",
   "version": "1.0.0",
-  "description": "Venom-Bot corriendo en Railway o Render con Puppeteer",
+  "description": "Venom-Bot ejecutado en Railway conectado a GPT en Render",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,6 +9,6 @@
   "dependencies": {
     "venom-bot": "^4.0.0",
     "dotenv": "^16.0.3",
-    "puppeteer": "^22.8.2"
+    "node-fetch": "^2.6.7"
   }
 }
