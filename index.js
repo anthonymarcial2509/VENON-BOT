@@ -1,4 +1,3 @@
-// === index.js (para Railway, Venom-bot con Puppeteer) ===
 const venom = require('venom-bot');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
@@ -39,10 +38,12 @@ function start(client) {
         });
 
         const data = await res.json();
-        await client.sendText(message.from, data.respuesta || '⚠️ Sin respuesta de la IA.');
+        const respuesta = data.respuesta || '🤖 Sin respuesta.';
+        await client.sendText(message.from, respuesta);
+
       } catch (err) {
-        console.error('❌ Error al contactar con el servidor GPT:', err);
-        await client.sendText(message.from, '⚠️ Error al conectar con la IA.');
+        console.error('❌ Error comunicando con el servidor GPT:', err);
+        await client.sendText(message.from, '❌ Error al conectar con el servidor GPT.');
       }
     }
   });
