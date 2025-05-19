@@ -1,7 +1,7 @@
 {
   "name": "venom-puppeteer-cloud",
   "version": "1.0.0",
-  "description": "Venom-Bot en la nube conectado a un servidor GPT en Render",
+  "description": "Bot de WhatsApp en la nube usando Puppeteer y servidor intermedio",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,6 +9,7 @@
   "dependencies": {
     "venom-bot": "^4.0.0",
     "dotenv": "^16.0.3",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "puppeteer": "^22.8.2"
   }
 }
