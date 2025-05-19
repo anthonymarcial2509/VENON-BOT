@@ -6,7 +6,7 @@ venom
   .create({
     session: 'bot-session',
     headless: true,
-    useChrome: false,
+    useChrome: false, // Usa Chromium de Puppeteer
     browserArgs: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -16,7 +16,8 @@ venom
       '--single-process',
       '--disable-gpu'
     ],
-    logQR: true
+    logQR: false, // true si quieres ver el QR por consola
+    disableWelcome: true
   })
   .then((client) => start(client))
   .catch((error) => {
@@ -29,7 +30,11 @@ function start(client) {
 
   client.onMessage(async (message) => {
     if (!message.isGroupMsg && message.body) {
-      await client.sendText(message.from, 'Hola! Soy un bot en la nube con Puppeteer.');
+      try {
+        await client.sendText(message.from, 'Hola! Soy un bot en la nube con Puppeteer.');
+      } catch (err) {
+        console.error('❌ Error enviando mensaje:', err);
+      }
     }
   });
 }
