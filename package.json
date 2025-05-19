@@ -1,0 +1,15 @@
+
+{
+  "name": "venom-bot-railway",
+  "version": "1.0.0",
+  "description": "Venom bot conectado a GPT personalizado",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "venom-bot": "^4.3.0",
+    "dotenv": "^16.0.3",
+    "node-fetch": "^2.6.7"
+  }
+}
